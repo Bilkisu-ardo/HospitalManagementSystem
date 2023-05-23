@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">{% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'adminstyle.css' %}">
+    <title>Patient Sessions</title>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'doctor_list' %}">Doctors</a></li>
+            <li><a href="{% url 'patient_list' %}">patients</a></li>
+            <li><a href="{% url 'patient_registration' %}">patient registration</a></li>
+
+        </ul>
+    </nav>
+</head>
+
+<body>
+    {% block content %}
+    <div class="container mt-3">
+        <h1>Patients</h1>
+        <a class="btn btn-primary" href="{% url 'patient_create' %}">Add Patient</a>
+        <hr> {% if object_list %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Birth Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in object_list %}
+                    <tr>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.email }}</td>
+                        <td>{{ patient.birth_date }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'patient_detail' patient.pk %}">View</a>
+                            <a class="btn btn-warning btn-sm" href="{% url 'patient_update' patient.pk %}">Edit</a>
+                        
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No patients found.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

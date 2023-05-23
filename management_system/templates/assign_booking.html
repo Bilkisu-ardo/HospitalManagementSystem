@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assign Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+            /* Add this line to align the form content to the left */
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #080606;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #9f3a3a;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Assign Booking</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="doctor_id">Select Doctor:</label>
+        <select id="doctor_id" name="doctor_id">
+            {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Assign">
+    </form>
+    <br>
+    <a href="{% url 'booking_detail' booking.id %}">Back to Booking Detail</a>
+</body>
+
+</html>

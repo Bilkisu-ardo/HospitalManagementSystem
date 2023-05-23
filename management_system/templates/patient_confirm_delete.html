@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">{% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'adminstyle.css' %}">
+    <title>Patient Sessions</title>
+</head>
+
+<body>{% block title %}Delete Patient {% block content %}
+    <h1>Delete {{ patient.name }}</h1>
+    <p>Are you sure you want to delete this patient?</p>
+    <form method="POST" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <a href="{% url 'patient_detail' patient.id %}" class="btn btn-secondary ml-2">Cancel</a> % endblock %
+    {% endblock %}
+</body>
+
+</html>

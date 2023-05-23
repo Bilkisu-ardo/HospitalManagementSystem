@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+<head>
+    <title>Session Documentation</title>
+</head>
+
+<body> {% load static %} {%block content%}
+    <center>
+        <h1>Appointments</h1>
+        {% for appoint in appointment %}.
+        <hr/>
+
+        <div class="booking-info">
+            <p><strong>Patient Name:</strong> {{ appoint.patient }}</p>
+            <p><strong>Date:</strong> {{ appoint.date }}</p>
+            <p><strong>Time:</strong> {{ appoint.time }}</p>
+            <p><strong>Doctor:</strong> {{ appoint.doctor }}</p>
+            <p><strong>Notes:</strong> {{ appoint.notes }}</p>
+            <p><a href="{% url 'updateappointment' appoint.id %}">Update appointment</a></p>
+            <p><a href="{% url 'deleteappointment' appoint.id %}">Delete</a></p>
+            <hr/>
+        </div>{% endfor %}
+    </center><a href="{% url 'booking_list' %}">Back to Booking Detail</a>{% endblock %}
+</body>
+
+</html>

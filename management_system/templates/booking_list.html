@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">{% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'adminstyle.css' %}">
+    <title>Patient Sessions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .empty-message {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+      
+            
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'doctor_list' %}">Doctors</a></li>
+                <li><a href="{% url 'patient_list' %}">patients</a></li>
+                <li><a href="{% url 'patient_registration' %}">patient registration</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    {% block content %}
+    <h1> Booking List</h1>
+    <table>
+        <tr>
+            <th>Patient Name</th>
+            <th>Date/Time</th>
+            <th>Doctor</th>
+            <th>Approved</th>
+            <th>Actions</th>
+            <th>view</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for appoint in appointment %}
+
+        <tbody>
+            <tr>
+                <th>{{ appoint.patient }}</th>
+                <td>{{ appoint.date }}</td>
+                <td>{{ appoint.time }}</td>
+                <td>{{ appoint.doctor }}</td>
+                <td>{{ appoint.notes }}</td>
+                <td><a href="{% url 'viewappoinmentlist' %}">View</a></td>
+                <td><a href="{% url 'updateappointment' appoint.id %}">Update appointment</a></td>
+                <td><a href="{% url 'deleteappointment' appoint.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+</body>
+
+</html>

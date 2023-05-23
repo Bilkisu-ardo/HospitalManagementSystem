@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Doctor Account{% endblock %}
+
+{% block content %}
+<h1>Create Doctor Account</h1>
+
+<form method="POST" action="{% url 'management_system:create_doctor' %}">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+    <!-- Add more fields as needed -->
+
+    <input type="submit" value="Create Account">
+</form>
+{% endblock %}
+
